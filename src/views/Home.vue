@@ -1,18 +1,29 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <!-- <AppMenu /> -->
+    <AppHeader />
+    <AppRestaurantInfo :datasource="fooddata" />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import AppHeader from "../components/AppHeader.vue";
+// import AppMenu from "../components/AppMenu.vue";
+import AppRestaurantInfo from "../components/AppRestaurantInfo.vue";
 
 export default {
-  name: 'Home',
   components: {
-    HelloWorld
-  }
-}
+    AppHeader,
+    AppRestaurantInfo,
+    // AppMenu
+  },
+  created() {
+     this.$store.dispatch('getFoodData')
+  },
+  computed: {
+    fooddata() {
+      return this.$store.state.fooddata;
+    },
+  },
+};
 </script>
